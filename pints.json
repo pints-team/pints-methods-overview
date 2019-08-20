@@ -20,7 +20,7 @@
                {"name": "differential evolution"}
              ]
            },
-           {"name": "Particle Swarm Optimisation (PSO)"}
+           {"name": "Particle Swarm Optimisation (PSO) "}
          ]
          },
          {"name": "Nelder-Mead"},
