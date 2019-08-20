@@ -1,8 +1,45 @@
 <!DOCTYPE html>
-<html xmlns:xlink="http://www.w3.org/1999/xlink">
-  <head>
-  <meta charset="utf-8">
-  <script src="http://d3js.org/d3.v3.min.js"></script>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>PINTS Methods overview</title>
+  <style>
+    .node {
+      cursor: pointer;
+    }
+
+    .node circle {
+      fill: #fff;
+      stroke: steelblue;
+      stroke-width: 1.5px;
+    }
+
+    .node text {
+      font: 18px sans-serif;
+    }
+
+    .link {
+      fill: none;
+      stroke: #ccc;
+      stroke-width: 1.5px;
+    }
+
+    div.tooltip {
+        position: absolute;
+        text-align: center;
+        width: 100px;
+        height: 28px;
+        padding: 2px;
+        font: 12px sans-serif;
+        background: lightsteelblue;
+        border: 0px;
+        border-radius: 8px;
+        pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <script src="http://d3js.org/d3.v3.min.js" type="text/javascript"></script>
   <script>
     var margin = {top: 20, right: 10, bottom: 20, left: 120},
         width = 1800 - margin.right - margin.left,
@@ -216,43 +253,6 @@
       }
       update(d);
     }
-    </script>
-  <style>
-    .node {
-      cursor: pointer;
-    }
-
-    .node circle {
-      fill: #fff;
-      stroke: steelblue;
-      stroke-width: 1.5px;
-    }
-
-    .node text {
-      font: 18px sans-serif;
-    }
-
-    .link {
-      fill: none;
-      stroke: #ccc;
-      stroke-width: 1.5px;
-    }
-
-    div.tooltip {
-        position: absolute;
-        text-align: center;
-        width: 100px;
-        height: 28px;
-        padding: 2px;
-        font: 12px sans-serif;
-        background: lightsteelblue;
-        border: 0px;
-        border-radius: 8px;
-        pointer-events: none;
-    }
-  </style>
-</head>
-<body>
-  <h1>PINTS Methods</h1>
+  </script>
 </body>
 </html>
