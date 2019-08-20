@@ -1,0 +1,475 @@
+{
+ "name": "PINTS",
+ "label": "overall",
+ "children": [
+   {
+    "name": "optimisation",
+    "children": [
+     {"name": "gradient-free",
+       "children":
+       [
+         {"name": "particle based methods",
+         "children":
+         [
+           {"name": "evolution strategies",
+             "children":
+             [
+               {"name": "Covariance Matrix Adaptation Evolution Strategy (CMAES)"},
+               {"name": "Separable Natural Evolution Strategy (SNES)"},
+               {"name": "Exponential Natural Evolution Strategy (XNES)"},
+               {"name": "differential evolution"}
+             ]
+           },
+           {"name": "Particle Swarm Optimisation (PSO)"}
+         ]
+         },
+         {"name": "Nelder-Mead"},
+         {"name": "simulated annealing"},
+         {"name": "random search"}
+       ]
+     },
+     {"name": "use gradients",
+       "children":
+       [
+         {"name": "1st order only",
+           "children":
+           [
+             {"name": "stochastic gradient descent"},
+             {"name": "AdaGrad"},
+             {"name": "Adaptive Moment Estimation (Adam)"},
+             {"name": "RMSProp"}
+           ]
+         },
+         {"name": "1st & 2nd order",
+           "children":
+           [
+             {"name": "stochastic gradient descent"},
+             {"name": "conjugate gradients"},
+             {"name": "Newton's method"}
+           ]
+         }
+       ]
+     }
+    ]
+  },
+  {
+   "name": "sampling",
+   "note": "approximates posterior by sampling from it",
+   "label": "category",
+   "children": [
+     {
+       "name": "Approximate Bayesian Computation (ABC)",
+       "note": "approximates posterior by reject sampling from the joint parameter-data distribution",
+       "label": "category",
+       "children": [
+         {
+           "name": "Approximate simulation",
+           "note": "involves approximate simulation of model",
+           "label": "category",
+           "children": [
+             {
+               "name": "Lazy ABC",
+               "note": "cheap approximate model simulated first then, if it passes, the same sample is used for the full model",
+               "status": "undecided"
+             }
+           ]
+         },
+         {
+           "name": "exact simulation",
+           "note": "requires only exact simulation from model",
+           "label": "category",
+           "children": [
+             {
+               "name": "ABC Markov chain Monte Carlo",
+               "note": "uses dependent samplers to generate proposals",
+               "status": "planned",
+               "url": "https://www.sciencedirect.com/science/article/abs/pii/S0169534710000662"
+             },
+             {
+               "name": "ABC Regression Adjustment",
+               "note": "uses the gradient in summary statistic to generate samples",
+               "status": "planned",
+               "url": "https://www.sciencedirect.com/science/article/abs/pii/S0169534710000662"
+             },
+             {
+               "name": "ABC Rejection",
+               "note": "reject samples from joint parameter-data distribution and accepts parameter if criteria are met",
+               "status": "planned",
+               "url": "https://www.genetics.org/content/162/4/2025.short"
+             },
+             {
+               "name": "ABC Sequential Monte Carlo",
+               "note": "uses importance sampling to generate proposals",
+               "status": "planned",
+               "url": ""
+             },
+             {
+               "name": "Saddle point ABC",
+               "note": "uses saddle point optimisation to overcome issues with regression and sampling ABC",
+               "status": "undecided",
+               "url": "https://papers.nips.cc/paper/8228-predictive-approximate-bayesian-computation-via-saddle-points.pdf"
+             },
+             {
+               "name": "Hamiltonian ABC",
+               "note": "approximates ABC gradient using forward simulations",
+               "status": "planned",
+               "url": "https://arxiv.org/pdf/1503.01916.pdf"
+             }
+           ]
+         }
+       ]
+     },
+     {
+       "name": "exact (asymptotically)",
+       "note": "approximates posterior exactly in infinite limit",
+       "label": "category",
+       "children": [
+         {
+           "name": "Markov chain Monte Carlo (MCMC)",
+           "note": "uses a dependent sampler (a Markov chain) to sample from posterior",
+           "label": "category",
+           "children": [
+             {
+               "name": "gradient-free",
+               "note": "only requires (unnormalised) posterior evaluations",
+               "label": "category",
+               "children": [
+                 {
+                   "name": "multiple chain",
+                   "note": "requires multiple Markov chains",
+                   "label": "category",
+                   "children": [
+                     {
+                       "name": "differential evolution",
+                       "note": "creates proposals by combining current values of a number of Markov chains",
+                       "label": "category",
+                       "children": [
+                         {
+                           "name": "(vanilla) differential evolution",
+                           "note": "combines the current value of two randomly-chosen Markov chains to form a proposal",
+                           "status": "done",
+                           "url" : "https://link.springer.com/article/10.1007/s11222-006-8769-1"
+                         },
+                         {
+                           "name": "emcee hammer",
+                           "note": "affine-invariant ensemble sampler that combines two randomly-chosen Markov chains to form a proposal",
+                           "status": "done",
+                           "url": "https://arxiv.org/abs/1202.3665"
+                         },
+                         {
+                           "name": "DiffeRential Evolution Adaptive Metropolis (DREAM)",
+                           "note": "combines current value of many Markov chains to form a proposal",
+                           "status": "done",
+                           "url": "https://www.degruyter.com/view/j/ijnsns.2009.10.3/ijnsns.2009.10.3.273/ijnsns.2009.10.3.273.xml"
+                         }
+                       ]
+                     },
+                     {
+                       "name": "Population MCMC",
+                       "note": "ensemble of Markov chains - each at different temperatures - used to sample from posterior",
+                       "status": "done",
+                       "url": "https://link.springer.com/article/10.1007/s11222-007-9028-9"
+                     }
+                   ]
+                 },
+                 {
+                   "name": "single chain",
+                   "note": "works with a single Markov chain",
+                   "label": "category",
+                   "children":[
+                     {
+                       "name": "adaptive",
+                       "note": "adapt sampling hyperparameters as it runs",
+                       "label": "category",
+                       "children": [
+                         {
+                           "name": "Adaptive parallel tempering",
+                           "note": "adapts temperature of chains as sampler runs",
+                           "status": "undecided",
+                           "url": "https://arxiv.org/pdf/1205.1076.pdf"
+                         },
+                         {
+                           "name": "Delayed Rejection Adaptive Metropolis",
+                           "note": "combines delayed rejection (using multiple proposal kernels) with adaptive covariance",
+                           "status": "done",
+                           "url": "https://link.springer.com/article/10.1007/s11222-006-9438-0"
+                         },
+                         {
+                           "name": "Generalised elliptical slice sampling",
+                           "note": "exploits parallel chains to construct scale-location Gaussian mixture approximation of posterior to use in elliptical slice sampling",
+                           "status": "planned",
+                           "url": "https://arxiv.org/abs/1210.7477"
+                         },
+                         {
+                           "name": "Mode jumping adaptive MCMC",
+                           "note": "finds modes via (for example) optimisation then implements an MCMC routine that jumps between them",
+                           "status": "planned",
+                           "url": "https://pdfs.semanticscholar.org/c75d/f035c23e3c0425409e70d457cd43b174076f.pdf"
+                         },
+                         {
+                           "name": "Remi",
+                           "note": "adapts covariance matrix according to previously accepted steps",
+                           "status": "done",
+                           "url": "http://dx.doi.org/10.1016/j.yjmcc.2015.11.018"
+                         },
+                         {
+                           "name": "Slice sampling with overrelaxation",
+                           "note": "univariate method that proposes values on the opposite side of a mode from current state",
+                           "status": "done",
+                           "url": "https://projecteuclid.org/euclid.aos/1056562461"
+                         },
+                         {
+                           "name": "Transport map accelerated Markov chain Monte Carlo",
+                           "note": "uses optimal transport theory to construct a reference space which can be more easily sampled than target space. Can we used to boost any MCMC algorithm",
+                           "status": "planned",
+                           "url": "https://arxiv.org/pdf/1412.5492.pdf"
+                         },
+                         {
+                           "name": "Vine copula adaptive MCMC",
+                           "note": "fits vine copula to samples and uses this to propose samples",
+                           "url": "https://projecteuclid.org/download/pdfview_1/euclid.ba/1362406647",
+                           "status": "planned"
+                         }
+                       ]
+                     },
+                     {
+                       "name": "non-adaptive",
+                       "note": "do not adapt sampling hyperparameters",
+                       "label": "category",
+                       "children": [
+                         {
+                           "name": "Random Walk Metropolis",
+                           "note": "oldest MCMC sampler out there",
+                           "status": "done",
+                           "url": "https://aip.scitation.org/doi/abs/10.1063/1.1699114"
+                         },
+                         {
+                           "name": "Slice sampling with doubling",
+                           "note": "univariate method that proposes by rejection sampling within slices estimated by doubling intervals",
+                           "status": "done",
+                           "url": "https://projecteuclid.org/euclid.aos/1056562461"
+                         },
+                         {
+                           "name": "Slice sampling with stepout",
+                           "note": "univariate method that proposes by rejection sampling within slices estimated by expanding intervals incrementally",
+                           "status": "done",
+                           "url": "https://projecteuclid.org/euclid.aos/1056562461"
+                         },
+                         {
+                           "name": "Slice sampling with hyperrectangles",
+                           "note": "multivariate method that proposes by rejection sampling within slices defined by hyperrectangles",
+                           "status": "planned",
+                           "url": "https://projecteuclid.org/euclid.aos/1056562461"
+                         },
+                         {
+                           "name": "Slice sampling with Peano curves",
+                           "note": "Skilling and MacKay's idea to represent multidimensional variables to a single integer via a space-filling curve, such as a Peano",
+                           "status": "planned",
+                           "url": "https://projecteuclid.org/download/pdf_1/euclid.aos/1056562461"
+                         }
+                       ]
+                     }
+                   ]
+                 }
+               ]
+             },
+             {
+               "name": "use gradients",
+               "note": "require derivatives of (unnormalised) posterior",
+               "label": "category",
+               "children": [
+                 {
+                   "name": "1st order sensitivities",
+                   "note": "requires 1st order derivative of (unnormalised) posterior",
+                   "label": "category",
+                   "children": [
+                     {
+                       "name": "Adaptive Hamiltonian Monte Carlo",
+                       "note": "uses expected squared jumping distance and Bayesian optimisation to adapt HMC steps",
+                       "status": "planned",
+                       "url": "http://proceedings.mlr.press/v28/wang13e.pdf"
+                     },
+                     {
+                       "name": "Adaptive Metropolis Adjusted Langevin Algorithm (MALA)",
+                       "note": "extends ideas from adaptive covariance Metropolis to make MALA adaptive",
+                       "status": "planned",
+                       "url": "https://link.springer.com/article/10.1007%2Fs11009-006-8550-0"
+                     },
+                     {
+                       "name": "Bouncy particle sampler",
+                       "note": "Markov chain 'bounces' off contours to avoid rejection",
+                       "status": "planned",
+                       "url": "https://arxiv.org/pdf/1510.02451.pdf"
+                     },
+                     {
+                       "name": "Hamiltonian Monte Carlo (HMC)",
+                       "note": "follows Hamiltonian dynamics of particles on negative log posterior space to generate proposals",
+                       "status": "done",
+                       "url": "https://arxiv.org/pdf/1206.1901.pdf"
+                     },
+                     {
+                       "name": "Metropolis Adjusted Langevin Algorithm (MALA)",
+                       "note": "solves a diffusion equation of a particle so that its stationary distribution is the posterior",
+                       "status": "done",
+                       "url": "https://rss.onlinelibrary.wiley.com/doi/full/10.1111/j.1467-9868.2010.00765.x"
+                     },
+                     {
+                       "name": "Monomial Gamma Hamiltonian Monte Carlo (MG HMC)",
+                       "note": "uses generalised kinetic energies and momentum distribution opposed to standard HMC (in doing so, unifies HMC and slice sampling)",
+                       "status": "planned",
+                       "url": "https://papers.nips.cc/paper/6147-towards-unifying-hamiltonian-monte-carlo-and-slice-sampling.pdf"
+                     },
+                     {
+                       "name": "No U-Turn Sampler (NUTS)",
+                       "note": "a dynamic version of HMC which avoids ``U-turns'' in parameter space",
+                       "status": "planned",
+                       "url": "https://arxiv.org/abs/1111.4246"
+                     },
+                     {
+                       "name": "Slice sampling with adaptive hyperrectangles",
+                       "note": "proposes values by adaptively shrinking hyperrectangles after each rejection",
+                       "status": "planned",
+                       "url": "https://arxiv.org/abs/1003.3201"
+                     },
+                     {
+                       "name": "Slice sampling with covariance matching",
+                       "note": "matches conditional variance of proposal distribution to uniform distribution over a section of slice",
+                       "status": "planned",
+                       "url": "https://arxiv.org/abs/1003.3201"
+                     },
+                     {
+                       "name": "Slice sampling with rank shrinking",
+                       "note": " shrinks rank of proposal distribution to draw next proposal from a more convenient subspace",
+                       "status": "planned",
+                       "url": "https://arxiv.org/abs/1003.3201"
+                     },
+                     {
+                       "name": "Shadow Hamiltonian Monte Carlo",
+                       "note": "considers a shadow Hamiltonian (of integrator) and uses this to propose momenta resulting in higher acceptance rates. See the following for shadow Hamiltonian construction: https://epubs.siam.org/doi/abs/10.1137/S106482750138318X",
+                       "status": "planned",
+                       "url": "https://arxiv.org/pdf/1705.02891v1.pdf"
+                     }
+                   ]
+                 },
+                 {
+                   "name": "2nd order sensitivities",
+                   "note": "requires 2nd order derivative of (unnormalised) posterior",
+                   "label": "category",
+                   "children": [
+                     {
+                       "name": "Riemannian Manifold Hamiltonian Monte Carlo (RMHMC)",
+                       "note": "uses the curvature of posterior to determine speed of particle moving over negative log posterior space",
+                       "status": "planned",
+                       "url": "https://rss.onlinelibrary.wiley.com/doi/full/10.1111/j.1467-9868.2010.00765.x"
+                     },
+                     {
+                       "name": "Riemannian Manifold Langevin",
+                       "note": "uses curvature of posterior to determine a natural gradient that guides proposals",
+                       "status": "planned",
+                       "url": "https://rss.onlinelibrary.wiley.com/doi/full/10.1111/j.1467-9868.2010.00765.x"
+                     }
+                   ]
+                 }
+               ]
+             }
+           ]
+         },
+         {
+           "name": "nested sampling",
+           "note": "generates posterior samples from regions of parameter space in proportion to their probability mass",
+           "label": "category",
+           "children": [
+             {
+               "name": "gradient-free",
+               "note": "only requires (unnormalised) posterior evaluations",
+               "label": "category",
+               "children": [
+                 {
+                   "name": "Rejection nested sampler",
+                   "note": "generates proosals by rejection sampling the prior subject to a likelihood threshold",
+                   "status": "done",
+                   "url": "https://projecteuclid.org/euclid.ba/1340370944"
+                 },
+                 {
+                   "name": "Ellipsoidal nested sampler",
+                   "note": "fits an ellipse to active particles then generates proposals by uniformly sampling ellipses",
+                   "status": "done",
+                   "url": "https://iopscience.iop.org/article/10.1086/501068"
+                 },
+                 {
+                   "name": "MCMC nested sampler",
+                   "note": "uses MH accept-reject to sample from constrained prior region",
+                   "status": "planned",
+                   "url": "https://arxiv.org/pdf/0704.3704.pdf"
+                 },
+                 {
+                   "name": "MultiNest",
+                   "note": "adaptively fits a number of ellipses to active particles then uniformly samples them for proposals",
+                   "status": "planned",
+                   "url": "https://arxiv.org/abs/0809.3437"
+                 },
+                 {
+                   "name": "MultiNest using importance sampling",
+                   "note": "uses importance sampling to improve evidence estimates from MultiNest",
+                   "status": "planned",
+                   "url": "https://arxiv.org/pdf/1306.2144.pdf"
+                 },
+                 {
+                   "name": "PolyChord",
+                   "note": "uses slice sampling to generate proposals from prior",
+                   "status": "planned",
+                   "url": "https://arxiv.org/abs/1506.00171"
+                 },
+                 {
+                   "name": "Diffusive nested sampling",
+                   "note": "uses MCMC to explore constrained prior distributions",
+                   "status": "planned",
+                   "url": "https://arxiv.org/pdf/0912.2380"
+                 },
+                 {
+                   "name": "Dynamic nested sampling",
+                   "note": "number of active points varies to allocate samples more efficiently",
+                   "status": "planned",
+                   "url": "https://arxiv.org/abs/1704.03459"
+                 },
+                 {
+                   "name": "DyPolyChord",
+                   "note": "version of PolyChord where number of active points varies",
+                   "status": "planned",
+                   "url": "https://arxiv.org/abs/1704.03459"
+                 }
+               ]
+             },
+             {
+               "name": "use gradients",
+               "note": "require derivatives of likelihood",
+               "label": "category",
+               "children": [
+                 {
+                   "name": "Constrained Hamiltonian Monte Carlo",
+                   "note": "uses HMC to sample from within constrained likelihood regions of prior",
+                   "status": "planned",
+                   "url": "https://arxiv.org/pdf/1005.0157.pdf"
+                 },
+                 {
+                   "name": "Galilean Monte Carlo",
+                   "note": "uses gradient of likelihood at edges of constrained prior region to guide proposals",
+                   "status": "planned",
+                   "url": "https://arxiv.org/abs/1312.5638"
+                 }
+               ]
+             }
+           ]
+         },
+         {
+           "name": "Sequential Monte Carlo",
+           "note": "uses a series of tempered distributions to propose efficient samples from posterior",
+           "status": "done",
+           "url": "https://link.springer.com/article/10.1007/s11222-007-9028-9"
+         }
+       ]
+     }
+   ]
+ }
+]
+}
